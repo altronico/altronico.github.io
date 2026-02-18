@@ -1,180 +1,913 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Altronico | Web, Mobile & Software Development</title>
-  <meta name="description" content="Altronico provides web development, mobile app development, and custom software solutions for businesses." />
+  <meta name="description"
+    content="Altronico provides web development, mobile app development, and custom software solutions for businesses." />
+  <meta name="theme-color" content="#2B355C" />
+
+  <!-- Preconnect for better font loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
+    /* ===== CSS CUSTOM PROPERTIES ===== */
+    :root {
+      /* Primary & Accent Colors */
+      --color-primary: #2B355C;
+      --color-primary-dark: #1f2847;
+      --color-primary-light: #3d4a70;
+      --color-accent: #2F6DE1;
+      --color-accent-light: #4a85ec;
+      --color-accent-dark: #1a5ac9;
+
+      /* Neutral Colors */
+      --color-bg: #f8f9fc;
+      --color-surface: #ffffff;
+      --color-text: #1a1f36;
+      --color-text-muted: #5e6278;
+      --color-text-light: #8993a4;
+      --color-border: #e8eaed;
+
+      /* Spacing Scale */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --space-3xl: 64px;
+      --space-4xl: 96px;
+
+      /* Typography */
+      --font-family: 'Montserrat', system-ui, sans-serif;
+      --font-size-xs: 12px;
+      --font-size-sm: 14px;
+      --font-size-base: 16px;
+      --font-size-lg: 18px;
+      --font-size-xl: 20px;
+      --font-size-2xl: 24px;
+      --font-size-3xl: 32px;
+      --font-size-4xl: 40px;
+      --font-size-5xl: 48px;
+
+      /* Effects */
+      --shadow-sm: 0 1px 3px rgba(43, 53, 92, 0.08);
+      --shadow-md: 0 4px 12px rgba(43, 53, 92, 0.1);
+      --shadow-lg: 0 8px 24px rgba(43, 53, 92, 0.12);
+      --shadow-xl: 0 16px 48px rgba(43, 53, 92, 0.15);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f9fafb;
-      color: #111827;
+      font-family: var(--font-family);
+      font-size: var(--font-size-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
+    /* ===== LAYOUT ===== */
     .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 80px;
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      transition: var(--transition);
     }
 
-    .brand {
-      font-size: 18px;
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: var(--font-size-lg);
+    }
+
+    .nav-logo img {
+      width: 100%;
+    }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      gap: var(--space-xl);
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-text-muted);
+      font-weight: 500;
+      font-size: var(--font-size-sm);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    .nav-cta {
+      display: none;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--color-primary);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
       font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      color: #2563eb;
+      font-size: var(--font-size-sm);
+      transition: var(--transition);
     }
 
-    h1 {
-      font-size: 36px;
-      line-height: 1.3;
-      margin-bottom: 20px;
+    .nav-cta:hover {
+      background: var(--color-primary-dark);
     }
 
-    .subtitle {
-      font-size: 18px;
-      color: #4b5563;
-      max-width: 700px;
-      margin: 0 auto 30px;
+    /* ===== HERO SECTION ===== */
+    .hero {
+      padding-top: calc(80px + var(--space-4xl));
+      padding-bottom: var(--space-4xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 900px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(47, 109, 225, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md);
+      background: rgba(47, 109, 225, 0.1);
+      color: var(--color-accent);
+      border-radius: 50px;
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .hero h1 {
+      font-size: var(--font-size-4xl);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0 0 var(--space-lg);
+      color: var(--color-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-muted);
+      max-width: 600px;
+      margin: 0 auto var(--space-xl);
+      line-height: 1.7;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      align-items: center;
     }
 
     .btn {
-      display: inline-block;
-      padding: 14px 28px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      padding: var(--space-md) var(--space-xl);
+      border-radius: var(--radius-md);
+      font-family: var(--font-family);
+      font-size: var(--font-size-base);
       font-weight: 600;
-      transition: 0.2s ease;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
     }
 
-    .btn:hover {
-      background: #1d4ed8;
+    .btn-primary {
+      background: var(--color-accent);
+      color: white;
+      box-shadow: 0 4px 14px rgba(47, 109, 225, 0.35);
     }
 
-    section {
-      margin-bottom: 80px;
+    .btn-primary:hover {
+      background: var(--color-accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(47, 109, 225, 0.4);
     }
 
-    .section-title {
-      font-size: 26px;
-      margin-bottom: 40px;
+    .btn-primary:focus {
+      outline: 3px solid rgba(47, 109, 225, 0.4);
+      outline-offset: 2px;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--color-primary);
+      border: 2px solid var(--color-border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-primary);
+      background: var(--color-bg);
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-2xl);
+      margin-top: var(--space-3xl);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .stat {
       text-align: center;
     }
 
-    .services {
+    .stat-value {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      color: var(--color-primary);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: var(--space-4xl) 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto var(--space-3xl);
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-title {
+      font-size: var(--font-size-3xl);
+      font-weight: 700;
+      color: var(--color-primary);
+      margin: 0 0 var(--space-md);
+      letter-spacing: -0.01em;
+    }
+
+    .section-description {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-muted);
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* ===== SERVICES ===== */
+    .services-section {
+      background: white;
+    }
+
+    .services-grid {
       display: grid;
-      gap: 25px;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
     }
 
     .card {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: var(--transition);
     }
 
     .card:hover {
       transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(47, 109, 225, 0.1), rgba(43, 53, 92, 0.1));
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-md);
+      color: var(--color-accent);
+      font-size: 24px;
     }
 
     .card h3 {
-      margin-bottom: 12px;
-      font-size: 18px;
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin: 0 0 var(--space-sm);
     }
 
     .card p {
-      color: #6b7280;
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    .about {
-      max-width: 700px;
-      margin: auto;
-      text-align: center;
-      color: #4b5563;
-      font-size: 16px;
+      font-size: var(--font-size-base);
+      color: var(--color-text-muted);
+      margin: 0;
       line-height: 1.7;
     }
 
+    /* ===== ABOUT ===== */
+    .about-section {
+      background: linear-gradient(180deg, var(--color-bg) 0%, white 100%);
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-3xl);
+      align-items: center;
+    }
+
+    .about-text {
+      max-width: 560px;
+    }
+
+    .about-text h2 {
+      font-size: var(--font-size-3xl);
+      font-weight: 700;
+      color: var(--color-primary);
+      margin: 0 0 var(--space-md);
+      letter-spacing: -0.01em;
+    }
+
+    .about-text p {
+      font-size: var(--font-size-base);
+      color: var(--color-text-muted);
+      line-height: 1.8;
+      margin: 0 0 var(--space-md);
+    }
+
+    .about-features {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-lg) 0 0;
+    }
+
+    .about-features li {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) 0;
+      font-size: var(--font-size-base);
+      color: var(--color-text);
+    }
+
+    .about-features li::before {
+      content: '✓';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      background: var(--color-accent);
+      color: white;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .about-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .about-image {
+      max-width: 100%;
+      width: 380px;
+      height: auto;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-card {
+      background: white;
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-xl);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .about-card-stat {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .about-card-stat:last-child {
+      border-bottom: none;
+    }
+
+    .about-card-stat-label {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+    }
+
+    .about-card-stat-value {
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    /* ===== FOOTER ===== */
     footer {
+      background: var(--color-primary);
+      color: white;
+      padding: var(--space-3xl) 0 var(--space-xl);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-xl);
+    }
+
+    .footer-brand {
+      max-width: 300px;
+    }
+
+    .footer-brand img {
+      width: 100%;
+      margin-bottom: var(--space-md);
+    }
+
+    .footer-brand p {
+      font-size: var(--font-size-sm);
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .footer-title {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 0 0 var(--space-md);
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: var(--space-sm);
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: var(--font-size-sm);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      padding-top: var(--space-xl);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      align-items: center;
       text-align: center;
-      padding-top: 40px;
-      border-top: 1px solid #e5e7eb;
-      font-size: 14px;
-      color: #9ca3af;
+    }
+
+    .footer-copyright {
+      font-size: var(--font-size-sm);
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-contact {
+      font-size: var(--font-size-sm);
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer-contact a {
+      color: var(--color-accent-light);
+      text-decoration: none;
+    }
+
+    .footer-contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== UTILITY ===== */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 640px) {
+      .hero-cta-group {
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (min-width: 768px) {
-      h1 {
-        font-size: 48px;
+      :root {
+        --font-size-4xl: 52px;
+        --font-size-5xl: 56px;
       }
 
-      .services {
+      .nav-links,
+      .nav-cta {
+        display: flex;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-stats {
+        gap: var(--space-3xl);
+      }
+
+      .stat-value {
+        font-size: var(--font-size-3xl);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .services-grid {
         grid-template-columns: repeat(3, 1fr);
       }
+
+      .about-content {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    /* ===== REDUCED MOTION ===== */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ===== FOCUS VISIBLE ===== */
+    :focus-visible {
+      outline: 3px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    :focus:not(:focus-visible) {
+      outline: none;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <!-- Skip Link for Accessibility -->
+  <a href="#main-content" class="visually-hidden">Skip to main content</a>
 
-    <header>
-      <div class="brand">ALTRONICO</div>
-      <h1>Web, Mobile & Software Solutions for Businesses</h1>
-      <p class="subtitle">
-        We design and build practical digital solutions tailored to real business needs.
-      </p>
-      <a href="mailto:hello.altronico@gmail.com" class="btn">
-        Get in Touch
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Altronico Home">
+        <img src="logo.png" alt="" width="36" height="36" />
       </a>
-    </header>
 
-    <section>
-      <div class="section-title">Services</div>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
 
-      <div class="services">
-        <div class="card">
-          <h3>Website Development</h3>
-          <p>Modern, responsive websites built with clean and scalable code.</p>
-        </div>
+      <a href="mailto:hello.altronico@gmail.com" class="nav-cta">Get Started</a>
+    </div>
+  </nav>
 
-        <div class="card">
-          <h3>Mobile App Development</h3>
-          <p>Cross-platform applications designed for performance and usability.</p>
-        </div>
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-badge">Available for Projects</span>
 
-        <div class="card">
-          <h3>Custom Software</h3>
-          <p>Business-focused systems and workflow automation solutions.</p>
+          <h1 id="hero-heading">
+            Web, Mobile & Software Solutions by <span>Altronico</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Altronico is an independent technology studio building practical websites,
+            mobile apps, and custom software for growing businesses.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="mailto:hello.altronico@gmail.com" class="btn btn-primary">
+              Start Your Project
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <a href="#services" class="btn btn-secondary">
+              View Services
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section>
-      <div class="section-title">About</div>
-      <div class="about">
-        Altronico is an independent technology studio focused on delivering
-        reliable and practical software solutions for growing businesses.
+    <!-- Services Section -->
+    <section id="services" class="services-section" aria-labelledby="services-heading">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-label">What We Do</span>
+          <h2 id="services-heading" class="section-title">Our Services</h2>
+          <p class="section-description">
+            Practical development services focused on clean code, performance, and business requirements.
+          </p>
+        </header>
+
+        <div class="services-grid">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <h3>Website Development</h3>
+            <p>Modern, responsive websites built with clean, scalable code. From landing pages to complex web
+              applications, we deliver performant solutions.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
+            </div>
+            <h3>Mobile App Development</h3>
+            <p>Cross-platform applications designed for optimal performance and seamless user experience on iOS and
+              Android devices.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+                <line x1="14" y1="4" x2="10" y2="20"></line>
+              </svg>
+            </div>
+            <h3>Custom Software</h3>
+            <p>Tailored business solutions and workflow automation to streamline operations, enhance productivity, and
+              drive growth.</p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <footer>
-      © 2026 Altronico
-    </footer>
+    <!-- About Section -->
+    <section id="about" class="about-section" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <span class="section-label">About Us</span>
+            <h2 id="about-heading">Independent Tech Studio Building Practical Solutions</h2>
+            <p>
+              Altronico is an independent technology studio focused on delivering reliable and practical software
+              solutions for growing businesses. We believe in clean code, transparent communication, and measurable
+              results.
+            </p>
+            <p>
+              Altronico is currently operated as an independent studio.
+              We focus on clear communication, practical architecture,
+              and delivering software that solves real business problems.
+            </p>
+            <ul class="about-features">
+              <li>Transparent project management</li>
+              <li>Agile development methodology</li>
+              <li>Post-launch support & maintenance</li>
+              <li>Competitive pricing structure</li>
+            </ul>
+          </div>
+          <div class="about-visual">
+            <img src="about.png" alt="Altronico team working on software development" class="about-image" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  </div>
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <p>Altronico is an independent technology studio delivering web, mobile, and software solutions for businesses
+            worldwide.</p>
+        </div>
+
+        <div>
+          <h3 class="footer-title">Services</h3>
+          <ul class="footer-links">
+            <li><a href="#services">Website Development</a></li>
+            <li><a href="#services">Mobile Apps</a></li>
+            <li><a href="#services">Custom Software</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-title">Company</h3>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="mailto:hello.altronico@gmail.com">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-title">Connect</h3>
+          <ul class="footer-links">
+            <li><a href="mailto:hello.altronico@gmail.com">hello.altronico@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copyright">© 2026 Altronico. All rights reserved.</span>
+        <span class="footer-contact">Get in touch: <a
+            href="mailto:hello.altronico@gmail.com">hello.altronico@gmail.com</a></span>
+      </div>
+    </div>
+  </footer>
+
 </body>
+
 </html>
