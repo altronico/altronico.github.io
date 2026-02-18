@@ -168,13 +168,44 @@
       background: var(--color-primary-dark);
     }
 
+    /* ===== MAIN WRAPPER ===== */
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .content-wrapper {
+      /* Content wrapper for sections after hero */
+    }
+
     /* ===== HERO SECTION ===== */
     .hero {
-      padding-top: calc(80px + var(--space-4xl));
-      padding-bottom: var(--space-4xl);
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 70px);
+      min-height: calc(100dvh - 70px);
+      min-height: calc(100svh - 70px);
+      padding: calc(70px + var(--space-xl)) var(--space-md) var(--space-xl);
       text-align: center;
       position: relative;
       overflow: hidden;
+    }
+
+    /* Tablet and above */
+    @media (min-width: 768px) {
+      .hero {
+        padding: calc(70px + var(--space-2xl)) var(--space-xl) var(--space-2xl);
+      }
+    }
+
+    /* Desktop */
+    @media (min-width: 1024px) {
+      .hero {
+        padding: calc(70px + var(--space-3xl)) var(--space-2xl) var(--space-3xl);
+      }
     }
 
     .hero::before {
@@ -231,10 +262,10 @@
     }
 
     .hero h1 {
-      font-size: var(--font-size-4xl);
+      font-size: var(--font-size-2xl);
       font-weight: 700;
-      line-height: 1.15;
-      margin: 0 0 var(--space-lg);
+      line-height: 1.2;
+      margin: 0 0 var(--space-md);
       color: var(--color-primary);
       letter-spacing: -0.02em;
     }
@@ -247,11 +278,11 @@
     }
 
     .hero-subtitle {
-      font-size: var(--font-size-lg);
+      font-size: var(--font-size-base);
       color: var(--color-text-muted);
-      max-width: 600px;
-      margin: 0 auto var(--space-xl);
-      line-height: 1.7;
+      max-width: 100%;
+      margin: 0 auto var(--space-lg);
+      line-height: 1.6;
     }
 
     .hero-cta-group {
@@ -307,10 +338,11 @@
 
     .hero-stats {
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      gap: var(--space-2xl);
-      margin-top: var(--space-3xl);
-      padding-top: var(--space-xl);
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+      padding-top: var(--space-lg);
       border-top: 1px solid var(--color-border);
     }
 
@@ -319,7 +351,7 @@
     }
 
     .stat-value {
-      font-size: var(--font-size-2xl);
+      font-size: var(--font-size-xl);
       font-weight: 700;
       color: var(--color-primary);
       display: block;
@@ -645,7 +677,57 @@
     }
 
     /* ===== RESPONSIVE ===== */
+    /* Small phones: max-width 380px */
+    @media (max-width: 380px) {
+      .hero {
+        padding-left: var(--space-sm);
+        padding-right: var(--space-sm);
+      }
+
+      .hero h1 {
+        font-size: var(--font-size-xl);
+      }
+
+      .hero-subtitle {
+        font-size: var(--font-size-sm);
+      }
+
+      .btn {
+        padding: var(--space-sm) var(--space-md);
+        font-size: var(--font-size-sm);
+      }
+
+      .stat-value {
+        font-size: var(--font-size-lg);
+      }
+
+      .stat-label {
+        font-size: var(--font-size-xs);
+      }
+    }
+
+    /* Tablet: 640px and up */
     @media (min-width: 640px) {
+      .hero {
+        padding-top: calc(80px + var(--space-2xl));
+        padding-bottom: var(--space-2xl);
+      }
+
+      .hero h1 {
+        font-size: var(--font-size-3xl);
+      }
+
+      .hero-subtitle {
+        font-size: var(--font-size-lg);
+        max-width: 540px;
+      }
+
+      .hero-stats {
+        flex-direction: row;
+        gap: var(--space-xl);
+        margin-top: var(--space-2xl);
+      }
+
       .hero-cta-group {
         flex-direction: row;
         justify-content: center;
@@ -656,10 +738,40 @@
       }
     }
 
+    /* Tablet landscape / Small laptop: 768px and up */
     @media (min-width: 768px) {
       :root {
         --font-size-4xl: 52px;
         --font-size-5xl: 56px;
+      }
+
+      .hero {
+        padding-top: calc(80px + var(--space-3xl));
+        padding-bottom: var(--space-3xl);
+        min-height: auto;
+      }
+
+      .hero h1 {
+        font-size: var(--font-size-4xl);
+        line-height: 1.15;
+        margin-bottom: var(--space-lg);
+      }
+
+      .hero-subtitle {
+        font-size: var(--font-size-lg);
+        max-width: 600px;
+        margin-bottom: var(--space-xl);
+        line-height: 1.7;
+      }
+
+      .hero-stats {
+        gap: var(--space-3xl);
+        margin-top: var(--space-3xl);
+        padding-top: var(--space-xl);
+      }
+
+      .stat-value {
+        font-size: var(--font-size-3xl);
       }
 
       .nav-links,
@@ -670,17 +782,15 @@
       .services-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-
-      .hero-stats {
-        gap: var(--space-3xl);
-      }
-
-      .stat-value {
-        font-size: var(--font-size-3xl);
-      }
     }
 
+    /* Desktop: 1024px and up */
     @media (min-width: 1024px) {
+      .hero {
+        padding-top: calc(80px + var(--space-4xl));
+        padding-bottom: var(--space-4xl);
+      }
+
       .services-grid {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -697,6 +807,46 @@
         flex-direction: row;
         justify-content: space-between;
         text-align: left;
+      }
+    }
+
+    /* Large desktop: 1280px and up */
+    @media (min-width: 1280px) {
+      .hero h1 {
+        font-size: var(--font-size-5xl);
+      }
+
+      .hero-subtitle {
+        font-size: var(--font-size-xl);
+      }
+    }
+
+    /* Landscape mobile: ensure content fits */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero {
+        min-height: auto;
+        padding-top: calc(70px + var(--space-md));
+        padding-bottom: var(--space-md);
+      }
+
+      .hero h1 {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--space-sm);
+      }
+
+      .hero-subtitle {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--space-md);
+      }
+
+      .hero-stats {
+        margin-top: var(--space-md);
+        padding-top: var(--space-sm);
+        gap: var(--space-md);
+      }
+
+      .hero-badge {
+        margin-bottom: var(--space-sm);
       }
     }
 
@@ -745,39 +895,42 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <main id="main-content">
-    <!-- Hero Section -->
-    <section class="hero" aria-labelledby="hero-heading">
-      <div class="container">
-        <div class="hero-content">
-          <span class="hero-badge">Available for Projects</span>
+  <div class="main-wrapper">
+    <!-- Main Content -->
+    <main id="main-content">
+      <!-- Hero Section -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="container">
+          <div class="hero-content">
+            <span class="hero-badge">Available for Projects</span>
 
-          <h1 id="hero-heading">
-            Web, Mobile & Software Solutions by <span>Altronico</span>
-          </h1>
+            <h1 id="hero-heading">
+              Web, Mobile & Software Solutions by <span>Altronico</span>
+            </h1>
 
-          <p class="hero-subtitle">
-            Altronico is an independent technology studio building practical websites,
-            mobile apps, and custom software for growing businesses.
-          </p>
+            <p class="hero-subtitle">
+              Altronico is an independent technology studio building practical websites,
+              mobile apps, and custom software for growing businesses.
+            </p>
 
-          <div class="hero-cta-group">
-            <a href="mailto:hello.altronico@gmail.com" class="btn btn-primary">
-              Start Your Project
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-            <a href="#services" class="btn btn-secondary">
-              View Services
-            </a>
+            <div class="hero-cta-group">
+              <a href="mailto:hello.altronico@gmail.com" class="btn btn-primary">
+                Start Your Project
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="#services" class="btn btn-secondary">
+                View Services
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+  </div>
 
+  <div class="content-wrapper">
     <!-- Services Section -->
     <section id="services" class="services-section" aria-labelledby="services-heading">
       <div class="container">
@@ -863,50 +1016,52 @@
         </div>
       </div>
     </section>
-  </main>
+    </main>
 
-  <!-- Footer -->
-  <footer id="contact">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <p>Altronico is an independent technology studio delivering web, mobile, and software solutions for businesses
-            worldwide.</p>
+    <!-- Footer -->
+    <footer id="contact">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <p>Altronico is an independent technology studio delivering web, mobile, and software solutions for
+              businesses
+              worldwide.</p>
+          </div>
+
+          <div>
+            <h3 class="footer-title">Services</h3>
+            <ul class="footer-links">
+              <li><a href="#services">Website Development</a></li>
+              <li><a href="#services">Mobile Apps</a></li>
+              <li><a href="#services">Custom Software</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-title">Company</h3>
+            <ul class="footer-links">
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="mailto:hello.altronico@gmail.com">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer-title">Connect</h3>
+            <ul class="footer-links">
+              <li><a href="mailto:hello.altronico@gmail.com">hello.altronico@gmail.com</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <h3 class="footer-title">Services</h3>
-          <ul class="footer-links">
-            <li><a href="#services">Website Development</a></li>
-            <li><a href="#services">Mobile Apps</a></li>
-            <li><a href="#services">Custom Software</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="footer-title">Company</h3>
-          <ul class="footer-links">
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="mailto:hello.altronico@gmail.com">Contact</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="footer-title">Connect</h3>
-          <ul class="footer-links">
-            <li><a href="mailto:hello.altronico@gmail.com">hello.altronico@gmail.com</a></li>
-          </ul>
+        <div class="footer-bottom">
+          <span class="footer-copyright">© 2026 Altronico. All rights reserved.</span>
+          <span class="footer-contact">Get in touch: <a
+              href="mailto:hello.altronico@gmail.com">hello.altronico@gmail.com</a></span>
         </div>
       </div>
-
-      <div class="footer-bottom">
-        <span class="footer-copyright">© 2026 Altronico. All rights reserved.</span>
-        <span class="footer-contact">Get in touch: <a
-            href="mailto:hello.altronico@gmail.com">hello.altronico@gmail.com</a></span>
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
 </body>
 
